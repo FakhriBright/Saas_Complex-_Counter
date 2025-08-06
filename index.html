@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Belajar</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+
+    function Header({ author }) {
+      return (
+        <>
+          <h1 className="heading">
+            Belajar React manual bareng pak {author ? author : "Mirza"}
+          </h1>
+          <p onClick={() => alert('ok')}>Semangat!</p>
+        </>
+      );
+    }
+
+    function HomePage() {
+      const students = ["Movic", "Ghaly", "Danish"];
+      const [likes, setLikes] = React.useState(0);
+
+      const tambahLike = () => {
+        if (likes + 1 > 10) {
+          setLikes(0);
+        } else {
+          setLikes(likes + 1);
+        }
+      };
+
+      const kurangLike = () => {
+        if (likes - 1 < -10) {
+          setLikes(0);
+        } else {
+          setLikes(likes - 1);
+        }
+      };
+
+      const resetLike = () => setLikes(0); 
+
+      return (
+        <>
+          <Header />
+          <Header author="Fakhri" />
+          <ul>
+            {students.map((student) => (
+              <li key={student}>{student}</li>
+            ))}
+          </ul>
+          <div>
+            <button onClick={tambahLike}>+ Like</button>
+            <button onClick={kurangLike}>- Like</button>
+            <button onClick={resetLike}>Reset</button>
+            <p>Total Like: {likes}</p>
+          </div>
+        </>
+      );
+    }
+
+    root.render(<HomePage />);
+  </script>
+</body>
+</html>
